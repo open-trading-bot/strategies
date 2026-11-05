@@ -38,7 +38,8 @@
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm test && npm run build"
+    "prepublishOnly": "npm test && npm run build",
+    "demo": "npm run build && node examples/backtest-demo.mjs"
   },
   "dependencies": {
     "technicalindicators": "^3.1.0"

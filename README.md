@@ -65,6 +65,36 @@ This output comes from synthetic candles. It does not show how a strategy perfor
 
 `totalReturn` and `pnl` use the same currency as `tradeAmount`. `winRate` and `maxDrawdown` are percentages.
 
+## Demo on real market data
+
+The demo runs all strategies on real BTC/USDT candles from the public Bybit API. It needs no API keys. The npm package does not contain the demo, so you must clone the repository.
+
+```bash
+git clone https://github.com/open-trading-bot/strategies.git
+cd strategies
+npm install
+npm run demo
+```
+
+```text
+BTCUSDT perpetual, 1h candles, 2026-07-01 to 2026-09-30 (2208 candles)
+Trade amount: 100. Fee: 0.1% per side. Slippage: 0.05% per fill.
+
+STRATEGY       TRADES       PNL  WIN RATE  DRAWDOWN
+ma_crossover      125    -27.93     26.4%     4.38%
+rsi                24      1.36     79.2%     2.33%
+macd              149    -13.56     30.2%     2.07%
+bollinger          54    -34.04     46.3%     3.40%
+wyckoff            56    -44.02     39.3%     4.41%
+buy and hold        1     42.35         -         -
+```
+
+In this period, four strategies lost money, and all strategies gave less than buy and hold.
+
+This result shows one market and one period only. It does not predict future results. All strategies use their default parameters and 1h candles. `DRAWDOWN` uses a start balance of 1000. Read [Limits of the backtester](#limits-of-the-backtester).
+
+If the demo shows an HTTP error, Bybit can block your country or network.
+
 ## Get a signal
 
 ```ts
