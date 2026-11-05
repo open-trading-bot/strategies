@@ -10,6 +10,8 @@ Use it in a script, a notebook or your own bot. It includes MA crossover, RSI, M
 
 This package is the strategy code of [open-trading-bot](https://github.com/open-trading-bot/open-trading-bot).
 
+**[Live demo](https://opentradingbot.xyz)**: This demo shows the dashboard with sample data and real backtests. It needs no sign-up.
+
 > **Disclaimer:** Use this software only for education and research. It is **not financial advice**.
 > Crypto trading has a high risk of loss. A good backtest result does not predict future results.
 > You use this software at your own risk. The authors are not responsible for financial losses.
