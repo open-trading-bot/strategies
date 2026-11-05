@@ -1,6 +1,6 @@
 {
   "name": "@open-trading-bot/strategies",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "This package contains crypto trading strategies and a backtester with fees and slippage. It needs no server, database or exchange keys.",
   "license": "MIT",
   "type": "module",
