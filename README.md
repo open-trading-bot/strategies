@@ -1,9 +1,12 @@
 # @open-trading-bot/strategies
 
+[![npm](https://img.shields.io/npm/v/@open-trading-bot/strategies)](https://www.npmjs.com/package/@open-trading-bot/strategies)
 [![CI](https://github.com/open-trading-bot/strategies/actions/workflows/ci.yml/badge.svg)](https://github.com/open-trading-bot/strategies/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Crypto trading strategies and a backtester. The package needs no server, database or exchange keys. You give it candles, and it gives you signals or backtest results.
+
+Use it in a script, a notebook or your own bot. It includes MA crossover, RSI, MACD, Bollinger Bands and Wyckoff. Backtests include fees and slippage.
 
 This package is the strategy code of [open-trading-bot](https://github.com/open-trading-bot/open-trading-bot).
 
@@ -19,30 +22,46 @@ Requirements: Node.js 20 or later. The package is ESM only.
 npm install @open-trading-bot/strategies
 ```
 
-## Run a backtest
+## Quick start
 
-```ts
+```js
 import { runBacktest, getStrategy } from '@open-trading-bot/strategies';
 
-// Use closed candles only, oldest first.
-const candles = [
-  { timestamp: 1767225600000, open: 100, high: 101, low: 99, close: 100.5, volume: 1200 },
-  // ... more candles
-];
+// Synthetic candles for this example. Use real closed candles, oldest first.
+const candles = Array.from({ length: 1000 }, (_, i) => {
+  const close = 100 + Math.sin(i / 20) * 10 + i * 0.01;
+  return { timestamp: i * 3_600_000, open: close, high: close + 1, low: close - 1, close, volume: 1000 };
+});
 
 const result = runBacktest({
   strategyId: 'rsi',
   candles,
   symbol: 'BTC/USDT',
-  marketType: 'spot',
+  marketType: 'futures',
   tradeAmount: 100,
-  params: getStrategy('rsi')!.defaultParams,
+  params: getStrategy('rsi').defaultParams,
   feeRate: 0.001,       // 0.1% on each side
   slippageRate: 0.0005, // 0.05% on each fill
 });
 
-console.log(result.totalReturn, result.winRate, result.maxDrawdown, result.trades.length);
+console.log({
+  trades: result.trades.length,
+  totalReturn: result.totalReturn.toFixed(2),
+  winRate: result.winRate.toFixed(1),
+  maxDrawdown: result.maxDrawdown.toFixed(2),
+});
 ```
+
+```text
+{
+  trades: 16,
+  totalReturn: '-194.02',
+  winRate: '6.3',
+  maxDrawdown: '19.51'
+}
+```
+
+This output comes from synthetic candles. It does not show how a strategy performs on a real market.
 
 `totalReturn` and `pnl` use the same currency as `tradeAmount`. `winRate` and `maxDrawdown` are percentages.
 
