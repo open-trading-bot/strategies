@@ -1,0 +1,51 @@
+{
+  "name": "@open-trading-bot/strategies",
+  "version": "0.1.0",
+  "description": "Crypto trading strategies and a backtester with fees and slippage. No server, database or exchange keys.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/open-trading-bot/strategies.git"
+  },
+  "homepage": "https://github.com/open-trading-bot/strategies#readme",
+  "bugs": "https://github.com/open-trading-bot/strategies/issues",
+  "keywords": [
+    "algorithmic-trading",
+    "backtesting",
+    "crypto",
+    "trading-strategies",
+    "technical-analysis",
+    "rsi",
+    "macd",
+    "bollinger-bands",
+    "typescript"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm test && npm run build"
+  },
+  "dependencies": {
+    "technicalindicators": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.8.3",
+    "vitest": "^4.1.4"
+  }
+}
