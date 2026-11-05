@@ -4,7 +4,7 @@
 [![CI](https://github.com/open-trading-bot/strategies/actions/workflows/ci.yml/badge.svg)](https://github.com/open-trading-bot/strategies/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Crypto trading strategies and a backtester. The package needs no server, database or exchange keys. You give it candles, and it gives you signals or backtest results.
+This package contains crypto trading strategies and a backtester. It needs no server, database or exchange keys. You give it candles, and it gives you signals or backtest results.
 
 Use it in a script, a notebook or your own bot. It includes MA crossover, RSI, MACD, Bollinger Bands and Wyckoff. Backtests include fees and slippage.
 
@@ -16,7 +16,7 @@ This package is the strategy code of [open-trading-bot](https://github.com/open-
 
 ## Install
 
-Requirements: Node.js 20 or later. The package is ESM only.
+You must have Node.js 20 or later. The package supports ES modules only, so `require()` does not work.
 
 ```bash
 npm install @open-trading-bot/strategies
@@ -92,7 +92,7 @@ Each strategy has `defaultParams` and `defaultInterval`. To list the strategies,
 
 ## Fees and slippage
 
-The backtester always applies costs, unless you set them to `0`.
+The backtester always applies costs, unless you set them to `0`. Slippage is the difference between the expected price and the price of the fill.
 
 | Input | Default | Effect |
 |---|---|---|
@@ -108,7 +108,7 @@ Read these limits before you trust a result.
 - A trade fills at the close of the candle that gave the signal. A real order can fill only after that close.
 - The backtester does not count a position that is still open at the last candle. Thus a loss on this position does not show in the result.
 - The equity curve and `maxDrawdown` include closed trades only.
-- `sharpeRatio` is calculated per trade. It is not an annual value.
+- The backtester calculates `sharpeRatio` per trade. It is not an annual value.
 - Each trade uses the same `tradeAmount`. The start balance is 10 times `tradeAmount`.
 - A `sell` signal opens a short position, also for `spot`. Most spot markets do not let you do this.
 - The backtester does not include stop loss, position limits, funding fees or liquidation.
